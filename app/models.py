@@ -27,7 +27,7 @@ class Student(Base):
     name=Column(Integer(),nullable=False)
     grade=Column(String(),nullable=False)
     time_in=Column(DateTime(),default=datetime.now())
-    level=Column(String(),nullable=False)
+   
 class Teacher(Base):
     __tablename__='teachers'
     id=Column(Integer(),primary_key=True)

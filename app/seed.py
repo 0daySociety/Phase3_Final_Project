@@ -16,9 +16,6 @@ if __name__ =="__main__":
         Session=sessionmaker(bind=engine) # creating session to link to the database 
         session=Session()
 
-
-
-
         # below will contain all the session query for communicating with the database 
     #    to avoid the table to fill on each commit , i first delete all the data present , then add the new data 
         session.query(School).delete()
@@ -38,6 +35,32 @@ if __name__ =="__main__":
             ]
         
         session.bulk_save_objects(schools)
+        session.commit()
+
+
+        # populating the school database 
+        fake_grade =( "Kindergarten",
+                     "1st Grade",
+                     "2nd Grade",
+                     "3rd Grade",
+                    "4th Grade",
+                    "5th Grade",
+                    "6th Grade",
+                    "7th Grade",
+                    "8th Grade",
+                    "9th Grade",
+                    "10th Grade",
+                    "11th Grade",
+                    "12th Grade")
+        
+        student=[
+            Student(
+                name=fake.name(),
+                grade=fake_grade[random.randint(1,len(fake_grade)-1)]
+            )
+            for student in range(10)
+        ]
+        session.bulk_save_objects(student)
         session.commit()
         
 
@@ -80,9 +103,7 @@ if __name__ =="__main__":
         session.bulk_save_objects(teachers)
         session.commit()
 
-        # populating the workers table 
-
-        
+        # populating the workers table  
 
         workers=[
             Worker(name=fake.name())
