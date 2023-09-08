@@ -27,6 +27,10 @@ class Student(Base):
     name=Column(Integer(),nullable=False)
     grade=Column(String(),nullable=False)
     time_in=Column(DateTime(),default=datetime.now())
+    def __repr__(self):
+        return f"name:{self.name}"\
+        f"grade :{self.grade}"\
+        f"time in :{self.time_in}"
    
 class Teacher(Base):
     __tablename__='teachers'
@@ -36,10 +40,20 @@ class Teacher(Base):
     teaching_level=Column(String(),nullable=False)
     time_in=Column(DateTime(),default=datetime.now())
 
+    def __repr__(self):
+        return f"name:{self.name}"\
+        f"subject:{self.subjects}"\
+        f"teaching level :{self.teaching_level}" \
+        f"time in :{self.time_in}"
+
     
 class Worker(Base):
     __tablename__="workers"
     id =Column(Integer(),primary_key=True)
     name=Column(Integer(),nullable=False)
     time_in=Column(DateTime(),default=datetime.now)
+
+    def __repr__(self):
+        return f"name:{self.name}"\
+        f"time in :{self.time_in}"
 
