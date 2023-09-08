@@ -12,11 +12,34 @@ Base =declarative_base()
 
 
 class School(Base):
-    pass 
-class Teacher(Base):
-    pass
+    # creating the columns for the school table 
+    __tablename__="school"
+
+    __tableargs__=PrimaryKeyConstraint(name='id')
+    id=Column(Integer(),primary_key=True)
+    name=Column(String(),nullable=False)
+    location=Column(String(),nullable=False)
+
+
 class Student(Base):
-    pass
+    __tablename__='students'
+    id=Column(Integer(),primary_key=True)
+    name=Column(Integer(),nullable=False)
+    grade=Column(String(),nullable=False)
+    time_in=Column(DateTime(),default=datetime.now())
+    level=Column(String(),nullable=False)
+class Teacher(Base):
+    __tablename__='teachers'
+    id=Column(Integer(),primary_key=True)
+    name=Column(Integer(),nullable=False)
+    subjects=Column((String),nullable=False) #a techer can teach more that one subject 
+    teaching_level=Column(String(),nullable=False)
+    time_in=Column(DateTime(),default=datetime.now())
+
+    
 class Worker(Base):
-    pass 
+    __tablename__="workers"
+    id =Column(Integer(),primary_key=True)
+    name=Column(Integer(),nullable=False)
+    time_in=Column(DateTime(),default=datetime.now)
 
