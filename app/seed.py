@@ -111,6 +111,31 @@ if __name__ =="__main__":
         ]
         session.bulk_save_objects(workers)
         session.commit() 
+
+        # testing the querys in the cli
+
+        all_student_name=session.query(Student.name)
+        print(" -----------------Printing the student names student table--------------- ")
+        for name in all_student_name:
+            print(name)
+
+        Candidate_student=session.query(Student.name).filter(Student.grade =="12th Grade").first()
+        if Candidate_student:
+            print(f"The following student is  a candidate {Candidate_student.name}")
+        else:
+            print('no candidates found')    
+    #    printing all the names of teachers in the teachers table 
+        teachers_names=session.query(Teacher.name)
+        print("-----------------------Getting teachers names-------------------------")
+        for teacher in teachers_names:
+            print(teacher)    
+
+        teaching_levels=session.query(Teacher.teaching_level).filter(Teacher.teaching_level=='Bachelor\'s Degree')
+        for teacher in teaching_levels:
+            print(teacher)
+       
+
+        
         
 
 
