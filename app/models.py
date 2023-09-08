@@ -32,7 +32,7 @@ class Teacher(Base):
     __tablename__='teachers'
     id=Column(Integer(),primary_key=True)
     name=Column(Integer(),nullable=False)
-    subjects=Column((String),nullable=False) #a techer can teach more that one subject 
+    subjects=Column(String(),nullable=False) #a techer can teach more that one subject 
     teaching_level=Column(String(),nullable=False)
     time_in=Column(DateTime(),default=datetime.now())
 

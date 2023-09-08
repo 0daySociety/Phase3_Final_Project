@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from faker import Faker
+import random
 from models import Base,School,Teacher,Student,Worker
 fake=Faker()
 
@@ -15,7 +16,81 @@ if __name__ =="__main__":
         Session=sessionmaker(bind=engine) # creating session to link to the database 
         session=Session()
 
+
+
+
         # below will contain all the session query for communicating with the database 
+    #    to avoid the table to fill on each commit , i first delete all the data present , then add the new data 
+        session.query(School).delete()
+        session.query(Student).delete()
+        session.query(Teacher).delete()
+        session.query(Worker).delete()
+         # using a list datatype  for the school table 
+
+
+
+        #  populating the school table 
+        schools=[School(
+            name=fake.name(),
+            location=fake.city()
+            )
+            for school in range(10)
+            ]
+        
+        session.bulk_save_objects(schools)
+        session.commit()
+        
+
+        #populating the teachers table  
+
+
+        fake_subject =( 
+    "Mathematics",
+    "Science",
+    "History",
+    "English",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "Computer Science",
+    "Geography",
+    "Economics",
+    "Psychology",
+    "Sociology",
+    "Literature",
+    "Art",
+    "Music",
+    "Physical Education",
+    "Spanish",
+    "French",
+    "German",
+    "Latin")
+        fake_education_level =('High School', 'Associate Degree', 'Bachelor\'s Degree', 'Master\'s Degree', 'Doctorate')
+
+        # using a list datatype  for the school table
+        teachers=[
+            Teacher(
+                name=fake.name(),
+                subjects=fake_subject[random.randint(1,len(fake_subject)-1)],
+                # generating a random education level 
+                teaching_level=fake_education_level[random.randint(1,len(fake_education_level)-1)]
+                )
+                for teacher in range(10)
+        ]
+        session.bulk_save_objects(teachers)
+        session.commit()
+
+        # populating the workers table 
+
+        
+
+        workers=[
+            Worker(name=fake.name())
+             for worker in range(10)
+        ]
+        session.bulk_save_objects(workers)
+        session.commit() 
+        
 
 
     except Exception as e:
