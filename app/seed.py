@@ -1,6 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from faker import Faker
 from models import Base,School
+fake=Faker()
 
 # this file is were we are handling the transations and sessions of the database 
 
