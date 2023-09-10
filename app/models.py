@@ -19,7 +19,7 @@ class School(Base):
     id=Column(Integer(),primary_key=True)
     name=Column(String(),nullable=False)
     location=Column(String(),nullable=False)
-    people =relationship('Student',backref='school')
+  
 
 
 class Student(Base):
@@ -28,7 +28,6 @@ class Student(Base):
     name=Column(Integer(),nullable=False)
     grade=Column(String(),nullable=False)
     time_in=Column(DateTime(),default=datetime.now())
-    school= Column(Integer(),ForeignKey('School.id'))
 
     def __repr__(self):
         return f"name:{self.name}"\
@@ -42,7 +41,7 @@ class Teacher(Base):
     subjects=Column(String(),nullable=False) #a techer can teach more that one subject 
     teaching_level=Column(String(),nullable=False)
     time_in=Column(DateTime(),default=datetime.now())
-    school= Column(Integer(),ForeignKey('School.id'))
+   
 
     def __repr__(self):
         return f"name:{self.name}"\
@@ -56,8 +55,7 @@ class Worker(Base):
     id =Column(Integer(),primary_key=True)
     name=Column(Integer(),nullable=False)
     time_in=Column(DateTime(),default=datetime.now)
-    school= Column(Integer(),ForeignKey('School.id'))
-
+   
     def __repr__(self):
         return f"name:{self.name}"\
         f"time in :{self.time_in}"
